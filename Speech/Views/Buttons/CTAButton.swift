@@ -2,16 +2,11 @@ import SwiftUI
 
 struct CTAButton: View
 {
-    private let startConverting =
-    {
-        // TODO: - listen and populate the textield
-        // TODO: - switch image to mic.fill / mic based on current state
-        print("start converting")
-    }
+    var onToggle: (() -> Void)
     
     var body: some View
     {
-        Button(action: startConverting)
+        Button(action: onToggle)
         {
             Image(systemName: "mic")
                 .resizable()

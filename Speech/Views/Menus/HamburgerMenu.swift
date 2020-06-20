@@ -2,6 +2,9 @@ import SwiftUI
 
 struct HamburgerMenu: View
 {
+    var isOpen: Bool = false
+    var onToggle: (() -> Void)?
+    
     var body: some View
     {
         Button(action:
@@ -9,7 +12,7 @@ struct HamburgerMenu: View
             withAnimation
             {
                 // TODO: - open menu
-                print("Test")
+                self.onToggle?()
             }
         })
         {

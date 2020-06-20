@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ContentView: View
 {
+    @State private var isMenuOpen = false
+
     @State private var textfieldValue: String = ""
     let backgroundColor = Color(rgb: 0xA8DADC)
     let navigationSpacer = Spacer()
@@ -10,13 +12,25 @@ struct ContentView: View
     static var bindingTextfieldValue = Binding<String>(get: { textfieldValue },
                                                        set: { textfieldValue = $0 } )
     
+    @State private var recording = false
+
+    private func toggleMenu()
+    {
+        self.isMenuOpen.toggle()
+        print("menu: \(isMenuOpen.description)")
+    }
+    
     var body: some View
     {
         VStack(alignment: .leading)
         {
             HStack(alignment: .center, spacing: 0)
             {
-                HamburgerMenu()
+                HamburgerMenu(isOpen: isMenuOpen,
+                              onToggle:
+                {
+                    self.toggleMenu()
+                })
                 navigationSpacer
                 // TODO: - font & color
                 Text("Speech to Text")
@@ -41,7 +55,7 @@ struct ContentView: View
             HStack(alignment: .center)
             {
                 Spacer()
-                CTAButton()
+                CTAButton(onToggle: toggleCta)
                 Spacer()
             }
             
@@ -50,7 +64,12 @@ struct ContentView: View
             .background(backgroundColor.edgesIgnoringSafeArea(.all))
             .navigationBarHidden(true)
     }
-
+    
+    private func toggleCta()
+    {
+        self.recording.toggle()
+        print("recording: \(recording.description)")
+    }
 }
 
 struct ContentView_Previews: PreviewProvider
