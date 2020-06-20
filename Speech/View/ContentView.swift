@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ContentView: View
 {
+    @ObservedObject var speechToTextModel = SpeechToTextModel()
+    
     @State private var isMenuOpen = false
 
     @State private var textfieldValue: String = ""
@@ -34,7 +36,7 @@ struct ContentView: View
             
             ScrollView
             {
-                MultilineTextField("🗣 ➡️ 📃️",
+                MultilineTextField(speechToTextModel.textForDisplay,
                                    text: ContentView.bindingTextfieldValue,
                                    userEnabled: false)
                 .cornerRadius(10)

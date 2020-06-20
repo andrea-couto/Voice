@@ -1,11 +1,3 @@
-//
-//  SceneDelegate.swift
-//  Speech
-//
-//  Created by Andy Couto on 6/19/20.
-//  Copyright © 2020 Andy Couto. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
 

@@ -21,11 +21,14 @@ struct MultilineTextField: View
 
     var body: some View
     {
-        UITextViewWrapper(text: self.internalText,
-                          onDone: onCommit,
-                          userEnabled: userEnabled)
-            .frame(minHeight: viewHeight, maxHeight: viewHeight)
-            .background(placeholderView, alignment: .topLeading)
+        ZStack(alignment: .topLeading)
+        {
+            UITextViewWrapper(text: self.internalText,
+                              onDone: onCommit,
+                              userEnabled: userEnabled)
+                .frame(minHeight: viewHeight, maxHeight: viewHeight)
+            placeholderView
+        }        
     }
 
     var placeholderView: some View
