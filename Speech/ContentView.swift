@@ -13,12 +13,6 @@ struct ContentView: View
                                                        set: { textfieldValue = $0 } )
     
     @State private var recording = false
-
-    private func toggleMenu()
-    {
-        self.isMenuOpen.toggle()
-        print("menu: \(isMenuOpen.description)")
-    }
     
     var body: some View
     {
@@ -42,12 +36,7 @@ struct ContentView: View
             {
                 MultilineTextField("🗣 ➡️ 📃️",
                                    text: ContentView.bindingTextfieldValue,
-                                   userEnabled: false,
-                                   onCommit:
-                {
-                    // TODO: -
-                    print("text: \(ContentView.textfieldValue)")
-                })
+                                   userEnabled: false)
                 .cornerRadius(10)
                 .padding([.horizontal], 10)
             }
@@ -69,6 +58,12 @@ struct ContentView: View
     {
         self.recording.toggle()
         print("recording: \(recording.description)")
+    }
+    
+    private func toggleMenu()
+    {
+        self.isMenuOpen.toggle()
+        print("menu: \(isMenuOpen.description)")
     }
 }
 
