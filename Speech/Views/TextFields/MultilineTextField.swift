@@ -4,8 +4,9 @@ struct MultilineTextField: View
 {
     private var placeholder: String
     private var onCommit: (() -> Void)?
+    private var userEnabled: Bool
     // TODO: - ratio of superview
-    @State private var viewHeight: CGFloat = 200
+    @State private var viewHeight: CGFloat = 400
     @State private var shouldShowPlaceholder = false
     @Binding private var text: String
     
@@ -21,7 +22,8 @@ struct MultilineTextField: View
     var body: some View
     {
         UITextViewWrapper(text: self.internalText,
-                          onDone: onCommit)
+                          onDone: onCommit,
+                          userEnabled: userEnabled)
             .frame(minHeight: viewHeight, maxHeight: viewHeight)
             .background(placeholderView, alignment: .topLeading)
     }
@@ -39,11 +41,15 @@ struct MultilineTextField: View
         }
     }
     
-    init (_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil)
+    init (_ placeholder: String = "",
+          text: Binding<String>,
+          userEnabled: Bool,
+          onCommit: (() -> Void)? = nil)
     {
         self.placeholder = placeholder
         self.onCommit = onCommit
         self._text = text
+        self.userEnabled = userEnabled
         self._shouldShowPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
     }
 }
@@ -55,6 +61,7 @@ private struct UITextViewWrapper: UIViewRepresentable
 
     @Binding var text: String
     var onDone: (() -> Void)?
+    var userEnabled: Bool
 
     func makeUIView(context: UIViewRepresentableContext<UITextViewWrapper>) -> UITextView
     {
@@ -64,7 +71,7 @@ private struct UITextViewWrapper: UIViewRepresentable
         textField.isEditable = true
         textField.font = UIFont.preferredFont(forTextStyle: .body)
         textField.isSelectable = true
-        textField.isUserInteractionEnabled = true
+        textField.isUserInteractionEnabled = userEnabled
         textField.isScrollEnabled = true
         textField.backgroundColor = UIColor.white
         if nil != onDone
@@ -76,7 +83,8 @@ private struct UITextViewWrapper: UIViewRepresentable
         return textField
     }
 
-    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<UITextViewWrapper>)
+    func updateUIView(_ uiView: UITextView,
+                      context: UIViewRepresentableContext<UITextViewWrapper>)
     {
         if uiView.text != self.text
         {
@@ -90,7 +98,7 @@ private struct UITextViewWrapper: UIViewRepresentable
 
     func makeCoordinator() -> Coordinator
     {
-        return Coordinator(text: $text, onDone: onDone)
+        return Coordinator(text: $text, userEnabled: userEnabled, onDone: onDone)
     }
 
     final class Coordinator: NSObject, UITextViewDelegate
@@ -98,7 +106,7 @@ private struct UITextViewWrapper: UIViewRepresentable
         var text: Binding<String>
         var onDone: (() -> Void)?
 
-        init(text: Binding<String>, onDone: (() -> Void)? = nil)
+        init(text: Binding<String>, userEnabled: Bool, onDone: (() -> Void)? = nil)
         {
             self.text = text
             self.onDone = onDone
@@ -109,7 +117,9 @@ private struct UITextViewWrapper: UIViewRepresentable
             text.wrappedValue = uiView.text
         }
 
-        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+        func textView(_ textView: UITextView,
+                      shouldChangeTextIn range: NSRange,
+                      replacementText text: String) -> Bool
         {
             if let onDone = self.onDone, text == "\n"
             {

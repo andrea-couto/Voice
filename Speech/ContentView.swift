@@ -28,14 +28,24 @@ struct ContentView: View
             {
                 MultilineTextField("🗣 ➡️ 📃️",
                                    text: ContentView.bindingTextfieldValue,
+                                   userEnabled: false,
                                    onCommit:
                 {
-                    // TODO: - do something with the text
-                    print("Final text: \(ContentView.textfieldValue)")
+                    // TODO: -
+                    print("text: \(ContentView.textfieldValue)")
                 })
                 .cornerRadius(10)
                 .padding([.horizontal], 10)
             }
+                        
+            HStack(alignment: .center)
+            {
+                Spacer()
+                CTAButton()
+                Spacer()
+            }
+            
+            Spacer()
         }
             .background(backgroundColor.edgesIgnoringSafeArea(.all))
             .navigationBarHidden(true)
