@@ -5,14 +5,9 @@ struct ContentView: View
     @ObservedObject var speechToTextModel = SpeechToTextModel()
     
     @State private var isMenuOpen = false
-
-    @State private var textfieldValue: String = ""
+    
     let backgroundColor = Color(rgb: 0xA8DADC)
     let navigationSpacer = Spacer()
-    
-    static var textfieldValue: String = ""
-    static var bindingTextfieldValue = Binding<String>(get: { textfieldValue },
-                                                       set: { textfieldValue = $0 } )
         
     var body: some View
     {
@@ -35,7 +30,7 @@ struct ContentView: View
             ScrollView
             {
                 MultilineTextField(speechToTextModel.defaultTextForDisplay,
-                                   text: speechToTextModel.bindingTextForDisplay,
+                                   text: speechToTextModel.$textForDisplay,
                                    userEnabled: false)
                 .cornerRadius(10)
                 .padding([.horizontal], 10)

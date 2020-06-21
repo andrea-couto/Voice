@@ -71,12 +71,14 @@ private struct UITextViewWrapper: UIViewRepresentable
         let textField = UITextView()
         textField.delegate = context.coordinator
 
-        textField.isEditable = true
+        // TODO: - allow copy, but fix the keyboard coming up if we only want the program to update the textfield
+        textField.isEditable = userEnabled
         textField.font = UIFont.preferredFont(forTextStyle: .body)
         textField.isSelectable = true
         textField.isUserInteractionEnabled = userEnabled
         textField.isScrollEnabled = true
         textField.backgroundColor = UIColor.white
+        textField.textColor = UIColor.black
         if nil != onDone
         {
             textField.returnKeyType = .done

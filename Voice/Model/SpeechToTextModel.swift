@@ -3,9 +3,8 @@ import Speech
 
 class SpeechToTextModel: NSObject, ObservableObject
 {
-    static var textForDisplay: String = ""
-    var bindingTextForDisplay = Binding<String>(get: { SpeechToTextModel.textForDisplay },
-                                                set: { SpeechToTextModel.textForDisplay = $0 } )
+    @State var textForDisplay = ""
+    
     @Published var buttonEnabled  = false
     let defaultTextForDisplay   = "🗣 ➡️ 📃️"
     // TODO: - published var for button image
