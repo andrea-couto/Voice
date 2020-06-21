@@ -4,7 +4,7 @@ struct MultilineTextField: View
 {
     private var placeholder: String
     private var onCommit: (() -> Void)?
-    private var userEnabled: Bool
+    private var userEnabled = false
     // TODO: - ratio of superview
     @State private var viewHeight: CGFloat = 400
     @State private var shouldShowPlaceholder = false
@@ -64,7 +64,7 @@ private struct UITextViewWrapper: UIViewRepresentable
 
     @Binding var text: String
     var onDone: (() -> Void)?
-    var userEnabled: Bool
+    var userEnabled = false
 
     func makeUIView(context: UIViewRepresentableContext<UITextViewWrapper>) -> UITextView
     {

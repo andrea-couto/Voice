@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5878B2F5249D67DA00FEAC00 /* Speech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speech.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5878B2F5249D67DA00FEAC00 /* Voice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5878B2F8249D67DA00FEAC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5878B2FA249D67DA00FEAC00 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5878B2FC249D67DA00FEAC00 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		5878B2EC249D67DA00FEAC00 = {
 			isa = PBXGroup;
 			children = (
-				5878B2F7249D67DA00FEAC00 /* Speech */,
+				5878B2F7249D67DA00FEAC00 /* Voice */,
 				5878B2F6249D67DA00FEAC00 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,12 +58,12 @@
 		5878B2F6249D67DA00FEAC00 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5878B2F5249D67DA00FEAC00 /* Speech.app */,
+				5878B2F5249D67DA00FEAC00 /* Voice.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5878B2F7249D67DA00FEAC00 /* Speech */ = {
+		5878B2F7249D67DA00FEAC00 /* Voice */ = {
 			isa = PBXGroup;
 			children = (
 				58DCB0E4249DCEB90097BE0F /* Model */,
@@ -73,7 +73,7 @@
 				5878B306249D67DC00FEAC00 /* Info.plist */,
 				5878B300249D67DC00FEAC00 /* Preview Content */,
 			);
-			path = Speech;
+			path = Voice;
 			sourceTree = "<group>";
 		};
 		5878B300249D67DC00FEAC00 /* Preview Content */ = {
@@ -149,9 +149,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5878B2F4249D67DA00FEAC00 /* Speech */ = {
+		5878B2F4249D67DA00FEAC00 /* Voice */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5878B309249D67DC00FEAC00 /* Build configuration list for PBXNativeTarget "Speech" */;
+			buildConfigurationList = 5878B309249D67DC00FEAC00 /* Build configuration list for PBXNativeTarget "Voice" */;
 			buildPhases = (
 				5878B2F1249D67DA00FEAC00 /* Sources */,
 				5878B2F2249D67DA00FEAC00 /* Frameworks */,
@@ -161,9 +161,9 @@
 			);
 			dependencies = (
 			);
-			name = Speech;
+			name = Voice;
 			productName = Speech;
-			productReference = 5878B2F5249D67DA00FEAC00 /* Speech.app */;
+			productReference = 5878B2F5249D67DA00FEAC00 /* Voice.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -181,7 +181,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5878B2F0249D67DA00FEAC00 /* Build configuration list for PBXProject "Speech" */;
+			buildConfigurationList = 5878B2F0249D67DA00FEAC00 /* Build configuration list for PBXProject "Voice" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -194,7 +194,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5878B2F4249D67DA00FEAC00 /* Speech */,
+				5878B2F4249D67DA00FEAC00 /* Voice */,
 			);
 		};
 /* End PBXProject section */
@@ -361,15 +361,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Speech/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Voice/Preview Content\"";
 				DEVELOPMENT_TEAM = 426MVMA2D7;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Speech/Info.plist;
+				INFOPLIST_FILE = Voice/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.couto.andy.Speech;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.couto.andy.Voice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -381,15 +382,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Speech/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Voice/Preview Content\"";
 				DEVELOPMENT_TEAM = 426MVMA2D7;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Speech/Info.plist;
+				INFOPLIST_FILE = Voice/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.couto.andy.Speech;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.couto.andy.Voice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -399,7 +401,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5878B2F0249D67DA00FEAC00 /* Build configuration list for PBXProject "Speech" */ = {
+		5878B2F0249D67DA00FEAC00 /* Build configuration list for PBXProject "Voice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5878B307249D67DC00FEAC00 /* Debug */,
@@ -408,7 +410,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5878B309249D67DC00FEAC00 /* Build configuration list for PBXNativeTarget "Speech" */ = {
+		5878B309249D67DC00FEAC00 /* Build configuration list for PBXNativeTarget "Voice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5878B30A249D67DC00FEAC00 /* Debug */,

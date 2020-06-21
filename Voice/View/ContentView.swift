@@ -13,9 +13,7 @@ struct ContentView: View
     static var textfieldValue: String = ""
     static var bindingTextfieldValue = Binding<String>(get: { textfieldValue },
                                                        set: { textfieldValue = $0 } )
-    
-    @State private var recording = false
-    
+        
     var body: some View
     {
         VStack(alignment: .leading)
@@ -36,8 +34,8 @@ struct ContentView: View
             
             ScrollView
             {
-                MultilineTextField(speechToTextModel.textForDisplay,
-                                   text: ContentView.bindingTextfieldValue,
+                MultilineTextField(speechToTextModel.defaultTextForDisplay,
+                                   text: speechToTextModel.bindingTextForDisplay,
                                    userEnabled: false)
                 .cornerRadius(10)
                 .padding([.horizontal], 10)
@@ -54,17 +52,17 @@ struct ContentView: View
         }
             .background(backgroundColor.edgesIgnoringSafeArea(.all))
             .navigationBarHidden(true)
+            .onAppear(perform: speechToTextModel.setupSpeech)
     }
     
     private func toggleCta()
     {
-        self.recording.toggle()
-        print("recording: \(recording.description)")
+        speechToTextModel.toggleRecording()
     }
     
     private func toggleMenu()
     {
-        self.isMenuOpen.toggle()
+        isMenuOpen.toggle()
         print("menu: \(isMenuOpen.description)")
     }
 }
