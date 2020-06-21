@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MultilineTextField: View
 {
-    private var placeholder: String
+    private let placeholder: String
     private var onCommit: (() -> Void)?
     private var userEnabled = false
     // TODO: - ratio of superview
@@ -15,7 +15,6 @@ struct MultilineTextField: View
         Binding<String>(get: { self.text } )
         {
             self.text = $0
-            self.shouldShowPlaceholder = $0.isEmpty
         }
     }
 
@@ -25,22 +24,9 @@ struct MultilineTextField: View
         {
             UITextViewWrapper(text: self.internalText,
                               onDone: onCommit,
-                              userEnabled: userEnabled)
+                              userEnabled: userEnabled,
+                              placeholder: placeholder)
                 .frame(minHeight: viewHeight, maxHeight: viewHeight)
-            placeholderView
-        }        
-    }
-
-    var placeholderView: some View
-    {
-        Group
-        {
-            if shouldShowPlaceholder
-            {
-                Text(placeholder).foregroundColor(.gray)
-                    .padding(.leading, 4)
-                    .padding(.top, 8)
-            }
         }
     }
     
@@ -53,7 +39,6 @@ struct MultilineTextField: View
         self.onCommit = onCommit
         self._text = text
         self.userEnabled = userEnabled
-        self._shouldShowPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
     }
 }
 
@@ -65,6 +50,7 @@ private struct UITextViewWrapper: UIViewRepresentable
     @Binding var text: String
     var onDone: (() -> Void)?
     var userEnabled = false
+    let placeholder: String
 
     func makeUIView(context: UIViewRepresentableContext<UITextViewWrapper>) -> UITextView
     {
@@ -79,6 +65,7 @@ private struct UITextViewWrapper: UIViewRepresentable
         textField.isScrollEnabled = true
         textField.backgroundColor = UIColor.white
         textField.textColor = UIColor.black
+        textField.text = placeholder
         if nil != onDone
         {
             textField.returnKeyType = .done
@@ -103,23 +90,29 @@ private struct UITextViewWrapper: UIViewRepresentable
 
     func makeCoordinator() -> Coordinator
     {
-        return Coordinator(text: $text, userEnabled: userEnabled, onDone: onDone)
+        return Coordinator(text: $text, userEnabled: userEnabled, placeholder: placeholder, onDone: onDone)
     }
 
     final class Coordinator: NSObject, UITextViewDelegate
     {
         var text: Binding<String>
         var onDone: (() -> Void)?
+        let placeholder: String
 
-        init(text: Binding<String>, userEnabled: Bool, onDone: (() -> Void)? = nil)
+        init(text: Binding<String>, userEnabled: Bool, placeholder: String, onDone: (() -> Void)? = nil)
         {
             self.text = text
+            self.placeholder = placeholder
             self.onDone = onDone
         }
 
         func textViewDidChange(_ uiView: UITextView)
         {
             text.wrappedValue = uiView.text
+            if uiView.text == ""
+            {
+                uiView.text = placeholder
+            }
         }
 
         func textView(_ textView: UITextView,

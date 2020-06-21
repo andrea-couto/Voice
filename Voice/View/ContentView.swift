@@ -30,7 +30,7 @@ struct ContentView: View
             ScrollView
             {
                 MultilineTextField(speechToTextModel.defaultTextForDisplay,
-                                   text: speechToTextModel.$textForDisplay,
+                                   text: $speechToTextModel.textForDisplay,
                                    userEnabled: false)
                 .cornerRadius(10)
                 .padding([.horizontal], 10)
@@ -50,6 +50,7 @@ struct ContentView: View
             .onAppear(perform: speechToTextModel.setupSpeech)
     }
     
+    // TODO: - limit the number of toggles per second
     private func toggleCta()
     {
         speechToTextModel.toggleRecording()

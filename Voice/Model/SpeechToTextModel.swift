@@ -3,7 +3,7 @@ import Speech
 
 class SpeechToTextModel: NSObject, ObservableObject
 {
-    @State var textForDisplay = ""
+    var textForDisplay = ""
     
     @Published var buttonEnabled  = false
     let defaultTextForDisplay   = "🗣 ➡️ 📃️"
@@ -21,21 +21,21 @@ class SpeechToTextModel: NSObject, ObservableObject
 
         if audioEngine.isRunning
         {
-            self.audioEngine.stop()
-            self.recognitionRequest?.endAudio()
-            self.buttonEnabled = false
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            buttonEnabled = false
 //            self.btnStart.setTitle("Start Recording", for: .normal)
         }
         else
         {
-            self.startRecording()
+            startRecording()
 //            self.btnStart.setTitle("Stop Recording", for: .normal)
         }
     }
     
     func setupSpeech()
     {
-        self.speechRecognizer?.delegate = self
+        speechRecognizer?.delegate = self
 
         SFSpeechRecognizer.requestAuthorization
         {
@@ -75,7 +75,7 @@ class SpeechToTextModel: NSObject, ObservableObject
             print("There was an error setting up the recording session: \(error)")
         }
 
-        self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
         let inputNode = audioEngine.inputNode
 
@@ -86,47 +86,44 @@ class SpeechToTextModel: NSObject, ObservableObject
 
         recognitionRequest.shouldReportPartialResults = true
 
-        print("recording")
-        self.recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler:
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler:
         {
+            [weak self]
             (result, error)
             in
 
             if (error != nil || result?.isFinal ?? false), let result = result
             {
-                // TODO: - textForDisplay not setting but the string is there in result??
-                // tried dispatching to main there's still an issue
-                self.textForDisplay = result.bestTranscription.formattedString
-                print("Text for display: \(String(describing: self.textForDisplay))")
-                print("result best transcription: \(result.bestTranscription.formattedString)")
+                self?.textForDisplay = result.bestTranscription.formattedString
 
                 if let error = error
                 {
                     print("There was an error: \(error)")
                 }
-                self.audioEngine.stop()
+                self?.audioEngine.stop()
                 inputNode.removeTap(onBus: 0)
 
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
+                self?.recognitionRequest = nil
+                self?.recognitionTask = nil
 
-                self.buttonEnabled = true
+                self?.buttonEnabled = true
             }
         })
 
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat)
         {
+            [weak self]
             (buffer, when)
             in
-            self.recognitionRequest?.append(buffer)
+            self?.recognitionRequest?.append(buffer)
         }
 
-        self.audioEngine.prepare()
+        audioEngine.prepare()
 
         do
         {
-            try self.audioEngine.start()
+            try audioEngine.start()
         }
         catch
         {
