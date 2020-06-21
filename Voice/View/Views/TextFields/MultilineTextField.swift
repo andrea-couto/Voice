@@ -78,9 +78,9 @@ private struct UITextViewWrapper: UIViewRepresentable
     func updateUIView(_ uiView: UITextView,
                       context: UIViewRepresentableContext<UITextViewWrapper>)
     {
-        if uiView.text != self.text
+        if uiView.text != text && text != ""
         {
-            uiView.text = self.text
+            uiView.text = text
         }
         if uiView.window != nil, !uiView.isFirstResponder
         {
