@@ -12,8 +12,7 @@ An iOS application to convert speech into text and text into speech.
 ## What's Left to do
 * Styling: focused mostly on layout and getting the logic working, plan to go back and update the colors and fonts later. 
 * Text to speech screen and logic
-* Navigation between screens
-* Menu 
+* Start on Text -> Speech since this is the functionality I'm really targeting
 
 ## Nice to Have
 * Shortcut screen for speaking commonly used recorded phrases. 
