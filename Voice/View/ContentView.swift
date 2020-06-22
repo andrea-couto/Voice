@@ -3,63 +3,50 @@ import SwiftUI
 struct ContentView: View
 {
     @ObservedObject var speechToTextModel = SpeechToTextModel()
-    
-    @State private var isMenuOpen = false
-    
+        
     let backgroundColor = Color(rgb: 0xA8DADC)
     let navigationSpacer = Spacer()
         
     var body: some View
     {
-        VStack(alignment: .leading)
+        NavigationView
         {
-            HStack(alignment: .center, spacing: 0)
+            VStack(alignment: .leading)
             {
-                HamburgerMenu(isOpen: isMenuOpen,
-                              onToggle:
+                ScrollView
                 {
-                    self.toggleMenu()
-                })
-                navigationSpacer
-                // TODO: - font & color
-                Text("Speech to Text")
-                    .font(.largeTitle)
-                navigationSpacer
-            }
-            
-            ScrollView
-            {
-                MultilineTextField(speechToTextModel.defaultTextForDisplay,
-                                   text: $speechToTextModel.textForDisplay,
-                                   userEnabled: false)
-                .cornerRadius(10)
-                .padding([.horizontal], 10)
-            }
-                        
-            HStack(alignment: .center)
-            {
-                Spacer()
-                CTAButton(onToggle: toggleCta)
+                    MultilineTextField(speechToTextModel.defaultTextForDisplay,
+                                       text: $speechToTextModel.textForDisplay,
+                                       userEnabled: false)
+                    .cornerRadius(10)
+                    .padding([.horizontal], 10)
+                }
+                            
+                HStack(alignment: .center)
+                {
+                    Spacer()
+                    CTAButton(onToggle: toggleCta)
+                    Spacer()
+                }
+                
                 Spacer()
             }
-            
-            Spacer()
-        }
             .background(backgroundColor.edgesIgnoringSafeArea(.all))
-            .navigationBarHidden(true)
+            .navigationBarTitle("Speech to Text", displayMode: .large)
+            .navigationBarItems(trailing:
+                NavigationLink(destination: Text("TODO"))
+                {
+                    Text("Text to Speech")
+                }
+            )
             .onAppear(perform: speechToTextModel.setupSpeech)
+        }
     }
     
     // TODO: - limit the number of toggles per second
     private func toggleCta()
     {
         speechToTextModel.toggleRecording()
-    }
-    
-    private func toggleMenu()
-    {
-        isMenuOpen.toggle()
-        print("menu: \(isMenuOpen.description)")
     }
 }
 
